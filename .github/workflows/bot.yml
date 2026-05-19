@@ -2,8 +2,8 @@ name: Foresight Bot
 
 on:
   schedule:
-    # Every 5 minutes (minimum allowed by GitHub Actions)
-    - cron: '*/5 * * * *'
+    # Every 15 minutes
+    - cron: '*/15 * * * *'
   workflow_dispatch: # allow manual trigger from the GitHub UI
 
 jobs:
