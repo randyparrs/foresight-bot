@@ -20,7 +20,7 @@ if (!studionet) {
 }
 
 // ── Config ────────────────────────────────────────────────────────────────────
-const MARKETS_ADDR = '0xC22D35c20D53730a86A7d456fc03B48556287903';
+const MARKETS_ADDR = '0x7F6BF01DbbC3be569a5C0f00A393E3D0dB3Aa413';
 const SIGNAL_ADDR  = '0xCb20df465C11BcB67e87b68A5B936453340c9d01';
 
 const PK = process.env.BOT_PRIVATE_KEY;
