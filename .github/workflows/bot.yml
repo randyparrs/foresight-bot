@@ -1,0 +1,27 @@
+name: Foresight Bot
+
+on:
+  schedule:
+    # Every 5 minutes (minimum allowed by GitHub Actions)
+    - cron: '*/5 * * * *'
+  workflow_dispatch: # allow manual trigger from the GitHub UI
+
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm install --omit=dev
+
+      - name: Run bot tick
+        env:
+          BOT_PRIVATE_KEY: ${{ secrets.BOT_PRIVATE_KEY }}
+        run: node bot.js --once

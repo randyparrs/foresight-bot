@@ -1,0 +1,17 @@
+{
+  "name": "foresight-bot",
+  "version": "1.0.0",
+  "description": "Automated bot for Foresight Platform on GenLayer Studio testnet",
+  "type": "module",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "tick": "node bot.js --once"
+  },
+  "dependencies": {
+    "genlayer-js": "^0.7.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
