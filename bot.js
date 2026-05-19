@@ -65,6 +65,7 @@ async function generateMarket() {
       address:      MARKETS_ADDR,
       functionName: 'generate_market',
       args:         [item.url, item.terms],
+      value:        0n,
     })
   );
 }
@@ -76,6 +77,7 @@ async function publishArticle() {
       address:      SIGNAL_ADDR,
       functionName: 'publish_article',
       args:         [item.category, ...item.urls],
+      value:        0n,
     })
   );
 }
@@ -109,6 +111,7 @@ async function resolveExpiredMarkets() {
             address:      MARKETS_ADDR,
             functionName: 'expire_market',
             args:         [String(id)],
+            value:        0n,
           })
         );
       } catch (_) { /* ignore individual failures */ }

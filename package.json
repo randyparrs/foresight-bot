@@ -9,7 +9,7 @@
     "tick": "node bot.js --once"
   },
   "dependencies": {
-    "genlayer-js": "0.6.10"
+    "genlayer-js": "1.1.8"
   },
   "engines": {
     "node": ">=20"
