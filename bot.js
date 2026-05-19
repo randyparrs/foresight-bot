@@ -7,8 +7,17 @@
 //   3. Tries to resolve any expired markets (best-effort, ignores failures)
 
 import { createClient, createAccount } from 'genlayer-js';
-import { studionet } from 'genlayer-js/chains';
+import * as chains from 'genlayer-js/chains';
 import { MARKETS, ARTICLES } from './news-pool.js';
+
+// Different genlayer-js versions name the Studio chain differently
+const studionet =
+  chains.studionet || chains.studio || chains.localnet || chains.simulator;
+
+if (!studionet) {
+  console.error('✕ Could not find Studio chain export. Available:', Object.keys(chains));
+  process.exit(1);
+}
 
 // ── Config ────────────────────────────────────────────────────────────────────
 const MARKETS_ADDR = '0xC22D35c20D53730a86A7d456fc03B48556287903';
