@@ -137,8 +137,8 @@ const onceMode = process.argv.includes('--once') || process.env.GITHUB_ACTIONS;
 if (onceMode) {
   tick().then(() => process.exit(0));
 } else {
-  // Local dev: loop every 5 min
-  console.log('[BOT] Running in loop mode (every 5 min). Ctrl+C to stop.');
+  // Long-running mode (Railway / local dev): loop every 15 min
+  console.log('[BOT] Running in loop mode (every 15 min). Ctrl+C to stop.');
   tick();
-  setInterval(tick, 5 * 60 * 1000);
+  setInterval(tick, 15 * 60 * 1000);
 }
