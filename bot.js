@@ -20,8 +20,8 @@ if (!studionet) {
 }
 
 // ── Config ────────────────────────────────────────────────────────────────────
-const MARKETS_ADDR = '0x7F6BF01DbbC3be569a5C0f00A393E3D0dB3Aa413';
-const SIGNAL_ADDR  = '0xCb20df465C11BcB67e87b68A5B936453340c9d01';
+const MARKETS_ADDR = '0x705eF45c6dEC36dE0E8fF4c17E7e6E24CB6bB359';
+const SIGNAL_ADDR  = '0x46e821C8Ec4D329AEd82F9e4FB4D9AcEBD573F17';
 
 const PK = process.env.BOT_PRIVATE_KEY;
 if (!PK) {
@@ -138,7 +138,7 @@ if (onceMode) {
   tick().then(() => process.exit(0));
 } else {
   // Long-running mode (Railway / local dev): loop every 15 min
-  console.log('[BOT] Running in loop mode (every 15 min). Ctrl+C to stop.');
+  console.log('[BOT] Running in loop mode (every 30 min). Ctrl+C to stop.');
   tick();
-  setInterval(tick, 15 * 60 * 1000);
+  setInterval(tick, 30 * 60 * 1000);
 }
