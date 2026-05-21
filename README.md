@@ -1,10 +1,10 @@
 # Foresight Bot
 
-Off-chain automation for the Foresight platform on GenLayer Bradbury testnet. Runs on GitHub Actions every 30 minutes and keeps the platform active without any manual intervention.
+Off-chain automation for the Foresight platform on GenLayer Bradbury testnet. Runs on GitHub Actions every hour and keeps the platform active without any manual intervention.
 
 ## What it does
 
-Each run generates one new prediction market and publishes one new Signal article. The bot picks a random news URL from the pool defined in news-pool.js, calls generate_market on the Markets contract, then calls publish_article on the Signal contract. It uses genlayer-js to send both transactions and waits for each one to reach FINALIZED status before exiting.
+Each run generates one new prediction market and publishes one new Signal article. The bot picks a random news URL from the pool defined in news-pool.js, calls generate_market on the Markets contract, then calls publish_article on the Signal contract. It uses genlayer-js to send both transactions and waits for each one to reach FINALIZED status before exiting. Triggered every hour via cron-job.org hitting the GitHub Actions dispatch endpoint.
 
 ## Network
 
