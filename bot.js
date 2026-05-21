@@ -1,4 +1,4 @@
-// Foresight Bot — automated GenLayer Studio testnet activity
+// Foresight Bot — automated GenLayer Bradbury testnet activity
 // Runs one tick per execution. Designed for GitHub Actions cron (every 5 min).
 //
 // Each tick:
@@ -10,18 +10,17 @@ import { createClient, createAccount } from 'genlayer-js';
 import * as chains from 'genlayer-js/chains';
 import { MARKETS, ARTICLES } from './news-pool.js';
 
-// Different genlayer-js versions name the Studio chain differently
-const studionet =
-  chains.studionet || chains.studio || chains.localnet || chains.simulator;
+// Bradbury testnet chain (Chain ID 4221, RPC https://rpc-bradbury.genlayer.com)
+const testnetBradbury = chains.testnetBradbury;
 
-if (!studionet) {
-  console.error('✕ Could not find Studio chain export. Available:', Object.keys(chains));
+if (!testnetBradbury) {
+  console.error('✕ Could not find testnetBradbury chain export. Available:', Object.keys(chains));
   process.exit(1);
 }
 
 // ── Config ────────────────────────────────────────────────────────────────────
-const MARKETS_ADDR = '0x705eF45c6dEC36dE0E8fF4c17E7e6E24CB6bB359';
-const SIGNAL_ADDR  = '0x46e821C8Ec4D329AEd82F9e4FB4D9AcEBD573F17';
+const MARKETS_ADDR = '0x43b38042d43dffD570bD561Ac46294785f7E202B';
+const SIGNAL_ADDR  = '0xd776B579E21a89C0FC0Ee33E78eda866d9aD5ded';
 
 const PK = process.env.BOT_PRIVATE_KEY;
 if (!PK) {
@@ -32,7 +31,7 @@ if (!PK) {
 // ── Setup client ──────────────────────────────────────────────────────────────
 const account = createAccount(PK.startsWith('0x') ? PK : '0x' + PK);
 const client  = createClient({
-  chain:   studionet,
+  chain:   testnetBradbury,
   account,
 });
 
