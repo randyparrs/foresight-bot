@@ -1,23 +1,29 @@
 name: Foresight Bot
 
 on:
-  workflow_dispatch: # triggered externally by cron-job.org every 15 min
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
 
 jobs:
   tick:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
+    timeout-minutes: 15
 
-      - uses: actions/setup-node@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
-      - name: Install deps
-        run: npm install --omit=dev
+      - name: Install dependencies
+        run: npm install
 
       - name: Run bot tick
+        run: node bot.js --once
         env:
           BOT_PRIVATE_KEY: ${{ secrets.BOT_PRIVATE_KEY }}
-        run: node bot.js --once
