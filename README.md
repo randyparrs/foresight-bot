@@ -8,27 +8,17 @@ Each run generates one new prediction market and publishes one new Signal articl
 
 ## Network
 
-| Parameter | Value |
-|-----------|-------|
-| Network | GenLayer Bradbury Testnet |
-| Chain ID | 4221 |
-| RPC | https://rpc-bradbury.genlayer.com |
-| Explorer | https://explorer-bradbury.genlayer.com |
+Running on GenLayer Bradbury testnet. Chain ID 4221, RPC at https://rpc-bradbury.genlayer.com, explorer at https://explorer-bradbury.genlayer.com.
 
 ## Contracts
 
-| Contract | Address |
-|----------|---------|
-| Foresight Markets | `0x43b38042d43dffD570bD561Ac46294785f7E202B` |
-| The Signal | `0xd776B579E21a89C0FC0Ee33E78eda866d9aD5ded` |
+Markets contract at 0x43b38042d43dffD570bD561Ac46294785f7E202B. Signal contract at 0xd776B579E21a89C0FC0Ee33E78eda866d9aD5ded.
 
 ## Setup
 
-Create a new wallet and export the private key. Make sure the wallet has GEN tokens on Bradbury testnet.
+Create a new wallet and export the private key. Make sure the wallet has GEN tokens on Bradbury testnet. Add the private key as a GitHub Actions secret named BOT_PRIVATE_KEY under Settings, Secrets and variables, Actions. Enable the workflow from the Actions tab if prompted, then trigger it manually once to confirm it works. After that the cron schedule takes over automatically.
 
-Add the private key as a GitHub Actions secret named BOT_PRIVATE_KEY under Settings → Secrets and variables → Actions. Enable the workflow from the Actions tab if prompted, then trigger it manually once from Actions → Foresight Bot → Run workflow to confirm it works. After that the cron schedule takes over automatically.
-
-To test locally, run npm install, copy .env.example to .env and paste your private key, then run node bot.js.
+To test locally run npm install, copy .env.example to .env and paste your private key, then run node bot.js.
 
 ## Files
 
