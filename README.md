@@ -8,11 +8,19 @@ Each run generates one new prediction market and publishes one new Signal articl
 
 ## Network
 
-Running on GenLayer Bradbury testnet. Chain ID 4221, RPC at https://rpc-bradbury.genlayer.com, explorer at https://explorer-bradbury.genlayer.com.
+| Parameter | Value |
+|-----------|-------|
+| Network | GenLayer Bradbury Testnet |
+| Chain ID | 4221 |
+| RPC | https://rpc-bradbury.genlayer.com |
+| Explorer | https://explorer-bradbury.genlayer.com |
 
 ## Contracts
 
-Markets contract at 0x43b38042d43dffD570bD561Ac46294785f7E202B. Signal contract at 0xd776B579E21a89C0FC0Ee33E78eda866d9aD5ded.
+| Contract | Address |
+|----------|---------|
+| Foresight Markets | `0x43b38042d43dffD570bD561Ac46294785f7E202B` |
+| The Signal | `0xd776B579E21a89C0FC0Ee33E78eda866d9aD5ded` |
 
 ## Setup
 
