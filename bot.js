@@ -19,8 +19,8 @@ if (!testnetBradbury) {
 }
 
 // ── Config ────────────────────────────────────────────────────────────────────
-const MARKETS_ADDR = '0x43b38042d43dffD570bD561Ac46294785f7E202B';
-const SIGNAL_ADDR  = '0xd776B579E21a89C0FC0Ee33E78eda866d9aD5ded';
+const MARKETS_ADDR = '0xb83A4cd9aD19147f6D1Df9fE1b4ee717E66Ff88a'; // Foresight_markets.py v4
+const SIGNAL_ADDR  = '0xC82F6551A1af36EB786AEC6A17bb77cA8Ca42a1f'; // The_Signal.py v2
 
 const PK = process.env.BOT_PRIVATE_KEY;
 if (!PK) {
