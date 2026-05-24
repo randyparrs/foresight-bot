@@ -1,8 +1,9 @@
 name: Foresight Bot
 
 on:
-  schedule:
-    - cron: '0 * * * *'
+  # schedule paused — Bradbury validators stuck (re-enable when network is stable)
+  # schedule:
+  #   - cron: '0 * * * *'
   workflow_dispatch:
 
 jobs:
