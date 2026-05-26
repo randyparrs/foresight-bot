@@ -6,8 +6,8 @@ Automated bot that runs on GenLayer Studionet every 4 hours. Each tick generates
 
 Each run calls two contracts on Studionet:
 
-1. `generate_market` on Foresight Markets — picks a random news URL from the pool and creates a new YES/NO prediction market on-chain
-2. `publish_article` on The Signal — picks a random news source and publishes an AI-written article on-chain with title, headline, body, tags, and sentiment
+1. `generate_market` on Foresight Markets  picks a random news URL from the pool and creates a new YES/NO prediction market on-chain
+2. `publish_article` on The Signal  picks a random news source and publishes an AI-written article on-chain with title, headline, body, tags, and sentiment
 
 ## Network
 
