@@ -26,7 +26,7 @@ Each run calls two contracts on Studionet:
 
 ## Bot wallet
 
-`0x027bE5Ff6123a660243Fb65602a78e99271F0Fec` — authorized in both contracts to call `generate_market` and `publish_article`.
+`0x027bE5Ff6123a660243Fb65602a78e99271F0Fec`  authorized in both contracts to call `generate_market` and `publish_article`.
 
 ## How it runs
 
@@ -50,9 +50,9 @@ BOT_PRIVATE_KEY=0x... node bot.js --once
 
 ## Files
 
-- `bot.js` — main bot logic
-- `news-pool.js` — curated pool of news URLs by category (CRYPTO, TECH, POLITICS, SPORTS, MARKETS, OTHER)
-- `.github/workflows/bot.yml` — GitHub Actions workflow triggered by cron-job.org
+- `bot.js`  main bot logic
+- `news-pool.js`  curated pool of news URLs by category (CRYPTO, TECH, POLITICS, SPORTS, MARKETS, OTHER)
+- `.github/workflows/bot.yml`  GitHub Actions workflow triggered by cron-job.org
 
 ## Related
 
