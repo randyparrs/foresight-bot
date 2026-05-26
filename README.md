@@ -1,33 +1,60 @@
 # Foresight Bot
 
-Off-chain automation for the Foresight platform on GenLayer Bradbury testnet. Runs on GitHub Actions every hour and keeps the platform active without any manual intervention.
+Automated bot that runs on GenLayer Studionet every 4 hours. Each tick generates a new prediction market and publishes a news article on-chain.
 
 ## What it does
 
-Each run generates one new prediction market and publishes one new Signal article. The bot picks a random news URL from the pool defined in news-pool.js, calls generate_market on the Markets contract, then calls publish_article on the Signal contract. It uses genlayer-js to send both transactions and waits for each one to reach FINALIZED status before exiting. Triggered every hour via cron-job.org hitting the GitHub Actions dispatch endpoint.
+Each run calls two contracts on Studionet:
+
+1. `generate_market` on Foresight Markets — picks a random news URL from the pool and creates a new YES/NO prediction market on-chain
+2. `publish_article` on The Signal — picks a random news source and publishes an AI-written article on-chain with title, headline, body, tags, and sentiment
 
 ## Network
 
 | Parameter | Value |
 |-----------|-------|
-| Network | GenLayer Bradbury Testnet |
-| Chain ID | 4221 |
-| RPC | https://rpc-bradbury.genlayer.com |
-| Explorer | https://explorer-bradbury.genlayer.com |
+| Network | GenLayer Studionet |
+| Chain ID | 61999 |
+| RPC | https://studio.genlayer.com/api |
 
-## Contracts
+## Contracts (Studionet)
 
 | Contract | Address |
 |----------|---------|
-| Foresight Markets | `0x43b38042d43dffD570bD561Ac46294785f7E202B` |
-| The Signal | `0xd776B579E21a89C0FC0Ee33E78eda866d9aD5ded` |
+| Foresight Markets | `0x990e6B8982e5624fb700d051b9D90e74Cf68a6Cf` |
+| The Signal | `0x317ce8bb69C97ED302F22643b92Bc6e423B687C3` |
+
+## Bot wallet
+
+`0x027bE5Ff6123a660243Fb65602a78e99271F0Fec` — authorized in both contracts to call `generate_market` and `publish_article`.
+
+## How it runs
+
+cron-job.org triggers the GitHub Actions workflow via API dispatch every 4 hours. GitHub Actions runs `node bot.js --once` with the bot private key stored as `BOT_PRIVATE_KEY` secret.
+
+Schedule: `0 */4 * * *`
 
 ## Setup
 
-Create a new wallet and export the private key. Make sure the wallet has GEN tokens on Bradbury testnet. Add the private key as a GitHub Actions secret named BOT_PRIVATE_KEY under Settings, Secrets and variables, Actions. Enable the workflow from the Actions tab if prompted, then trigger it manually once to confirm it works. After that the cron schedule takes over automatically.
+```bash
+npm install
+```
 
-To test locally run npm install, copy .env.example to .env and paste your private key, then run node bot.js.
+Set `BOT_PRIVATE_KEY` as a GitHub Actions secret (the private key of the bot wallet).
+
+## Run manually
+
+```bash
+BOT_PRIVATE_KEY=0x... node bot.js --once
+```
 
 ## Files
 
-bot.js is the main script. One execution generates one market and one article. news-pool.js contains the pool of URLs and topic hints that rotate each run. .github/workflows/bot.yml has the cron configuration.
+- `bot.js` — main bot logic
+- `news-pool.js` — curated pool of news URLs by category (CRYPTO, TECH, POLITICS, SPORTS, MARKETS, OTHER)
+- `.github/workflows/bot.yml` — GitHub Actions workflow triggered by cron-job.org
+
+## Related
+
+- Contracts repo: https://github.com/randyparrs/foresight
+- Frontend: https://foresight-appv2.netlify.app
