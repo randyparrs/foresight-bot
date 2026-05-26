@@ -1,26 +1,25 @@
-// Foresight Bot — automated GenLayer Bradbury testnet activity
-// Runs one tick per execution. Designed for GitHub Actions cron (every 5 min).
+// Foresight Bot — automated GenLayer Studionet activity
+// Runs one tick per execution. Designed for GitHub Actions cron (every 4 hours).
 //
 // Each tick:
 //   1. Generates a new market   (Markets contract · generate_market)
 //   2. Publishes a new article  (Signal contract  · publish_article)
-//   3. Tries to resolve any expired markets (best-effort, ignores failures)
 
 import { createClient, createAccount } from 'genlayer-js';
 import * as chains from 'genlayer-js/chains';
 import { MARKETS, ARTICLES } from './news-pool.js';
 
-// Bradbury testnet chain (Chain ID 4221, RPC https://rpc-bradbury.genlayer.com)
-const testnetBradbury = chains.testnetBradbury;
+// Studionet chain (Chain ID 61999, RPC https://studio.genlayer.com/api)
+const studionet = chains.studionet;
 
-if (!testnetBradbury) {
-  console.error('✕ Could not find testnetBradbury chain export. Available:', Object.keys(chains));
+if (!studionet) {
+  console.error('✕ Could not find studionet chain export. Available:', Object.keys(chains));
   process.exit(1);
 }
 
 // ── Config ────────────────────────────────────────────────────────────────────
-const MARKETS_ADDR = '0xb83A4cd9aD19147f6D1Df9fE1b4ee717E66Ff88a'; // Foresight_markets.py v4
-const SIGNAL_ADDR  = '0xC82F6551A1af36EB786AEC6A17bb77cA8Ca42a1f'; // The_Signal.py v2
+const MARKETS_ADDR = '0x990e6B8982e5624fb700d051b9D90e74Cf68a6Cf'; // Foresight_markets_studio.py
+const SIGNAL_ADDR  = '0xc106a8741124a6E442809D1715e85D305DdEc61b'; // The_Signal_studio.py
 
 const PK = process.env.BOT_PRIVATE_KEY;
 if (!PK) {
@@ -31,7 +30,7 @@ if (!PK) {
 // ── Setup client ──────────────────────────────────────────────────────────────
 const account = createAccount(PK.startsWith('0x') ? PK : '0x' + PK);
 const client  = createClient({
-  chain:   testnetBradbury,
+  chain:   studionet,
   account,
 });
 
@@ -81,52 +80,11 @@ async function publishArticle() {
   );
 }
 
-async function resolveExpiredMarkets() {
-  try {
-    const countRaw = await client.readContract({
-      address:      MARKETS_ADDR,
-      functionName: 'get_market_count',
-      args:         [],
-    });
-    const count = parseInt(String(countRaw)) || 0;
-    console.log(`[BOT] market count: ${count}`);
-
-    // Check last 5 markets (most likely to be expirable)
-    const ids = Array.from({ length: Math.min(5, count) }, (_, i) => count - 1 - i);
-    for (const id of ids) {
-      try {
-        const raw = await client.readContract({
-          address:      MARKETS_ADDR,
-          functionName: 'get_market',
-          args:         [String(id)],
-        });
-        const text   = String(raw);
-        const isOpen = text.includes('Status: OPEN') || text.includes('Status: open');
-        if (!isOpen) continue;
-
-        // Try expire (will no-op if not actually expired)
-        await writeAndWait(`expire_market(${id})`, () =>
-          client.writeContract({
-            address:      MARKETS_ADDR,
-            functionName: 'expire_market',
-            args:         [String(id)],
-            value:        0n,
-          })
-        );
-      } catch (_) { /* ignore individual failures */ }
-    }
-  } catch (err) {
-    console.error(`[BOT] resolveExpiredMarkets → ${err.message}`);
-  }
-}
-
 // ── Main tick ─────────────────────────────────────────────────────────────────
 async function tick() {
   console.log(`\n=== [BOT TICK] ${new Date().toISOString()} ===`);
   await generateMarket();
   await publishArticle();
-  // Disabled by default — uncomment if you want resolve attempts each tick
-  // await resolveExpiredMarkets();
   console.log(`=== [BOT TICK DONE] ===\n`);
 }
 
@@ -136,8 +94,8 @@ const onceMode = process.argv.includes('--once') || process.env.GITHUB_ACTIONS;
 if (onceMode) {
   tick().then(() => process.exit(0));
 } else {
-  // Long-running mode (Railway / local dev): loop every 15 min
-  console.log('[BOT] Running in loop mode (every 30 min). Ctrl+C to stop.');
+  // Long-running mode (local dev): loop every 4 hours
+  console.log('[BOT] Running in loop mode (every 4 hours). Ctrl+C to stop.');
   tick();
-  setInterval(tick, 30 * 60 * 1000);
+  setInterval(tick, 4 * 60 * 60 * 1000);
 }
