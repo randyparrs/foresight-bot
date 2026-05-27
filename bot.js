@@ -19,7 +19,7 @@ if (!studionet) {
 
 // ── Config ────────────────────────────────────────────────────────────────────
 const MARKETS_ADDR = '0x990e6B8982e5624fb700d051b9D90e74Cf68a6Cf'; // Foresight_markets_studio.py
-const SIGNAL_ADDR  = '0xc106a8741124a6E442809D1715e85D305DdEc61b'; // The_Signal_studio.py
+const SIGNAL_ADDR  = '0x317ce8bb69C97ED302F22643b92Bc6e423B687C3'; // The_Signal_studio.py
 
 const PK = process.env.BOT_PRIVATE_KEY;
 if (!PK) {
