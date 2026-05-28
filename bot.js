@@ -58,11 +58,13 @@ async function writeAndWait(label, fn) {
 // ── Actions ───────────────────────────────────────────────────────────────────
 async function generateMarket() {
   const item = pick(MARKETS);
+  const today = new Date().toISOString().split('T')[0];
+  const terms = `${item.terms}. Today's date is ${today}. The deadline in the question MUST be at least 60 days after ${today}. NEVER generate a question about an event that has already happened or a deadline that is in the past.`;
   return writeAndWait(`generate_market [${item.category}]`, () =>
     client.writeContract({
       address:      MARKETS_ADDR,
       functionName: 'generate_market',
-      args:         [item.url, item.terms],
+      args:         [item.url, terms],
       value:        0n,
     })
   );
