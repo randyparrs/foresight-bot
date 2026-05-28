@@ -40,14 +40,14 @@ export const MARKETS = [
   { category: 'POLITICS', url: 'https://apnews.com/world-news',                            terms: 'latest international politics' },
 
   // ── SPORTS ────────────────────────────────────────────────────────────────
-  { category: 'SPORTS',   url: 'https://www.espn.com/',                                    terms: 'latest sports news' },
-  { category: 'SPORTS',   url: 'https://www.bbc.com/sport',                                terms: 'latest sports results and news' },
-  { category: 'SPORTS',   url: 'https://www.skysports.com/',                               terms: 'latest football and sports news' },
-  { category: 'SPORTS',   url: 'https://www.espn.com/nba/',                                terms: 'latest NBA news and results' },
-  { category: 'SPORTS',   url: 'https://www.espn.com/soccer/',                             terms: 'latest soccer football news' },
-  { category: 'SPORTS',   url: 'https://www.espn.com/nfl/',                                terms: 'latest NFL news' },
-  { category: 'SPORTS',   url: 'https://www.bbc.com/sport/football',                       terms: 'latest football results' },
-  { category: 'SPORTS',   url: 'https://www.skysports.com/formula-1',                      terms: 'latest Formula 1 news' },
+  { category: 'SPORTS',   url: 'https://www.espn.com/nba/schedule/',                       terms: 'upcoming NBA game prediction next match winner' },
+  { category: 'SPORTS',   url: 'https://www.espn.com/nfl/schedule/',                       terms: 'upcoming NFL game prediction next match winner' },
+  { category: 'SPORTS',   url: 'https://www.espn.com/soccer/schedule/',                    terms: 'upcoming soccer match prediction next game winner' },
+  { category: 'SPORTS',   url: 'https://www.bbc.com/sport/football/scores-fixtures',       terms: 'upcoming football fixture prediction next match winner' },
+  { category: 'SPORTS',   url: 'https://www.skysports.com/football/fixtures',              terms: 'upcoming football match prediction next game winner' },
+  { category: 'SPORTS',   url: 'https://www.formula1.com/en/racing/2026.html',             terms: 'upcoming Formula 1 race prediction next GP winner' },
+  { category: 'SPORTS',   url: 'https://www.espn.com/tennis/schedule/',                    terms: 'upcoming tennis tournament prediction next match winner' },
+  { category: 'SPORTS',   url: 'https://www.skysports.com/boxing/news',                    terms: 'upcoming boxing fight prediction winner' },
 
   // ── OTHER ─────────────────────────────────────────────────────────────────
   { category: 'OTHER',    url: 'https://www.bbc.com/news',                                 terms: 'latest global news story' },
